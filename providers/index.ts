@@ -1,2 +1,1 @@
-// Providers barrel exports
-export {};
+export * from "./ThemeProvider";

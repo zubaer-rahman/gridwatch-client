@@ -3,6 +3,7 @@
 import { Kanban, List, Plus, RefreshCw, Search } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useMemo, useState } from "react";
+import OutagesKanban from "@/components/modules/outages/OutagesKanban";
 import OutagesSkeleton from "@/components/modules/outages/OutagesSkeleton";
 import OutagesTable from "@/components/modules/outages/OutagesTable";
 import { Button } from "@/components/ui/button";
@@ -20,7 +21,8 @@ function OutagesViewContent() {
   const statusParam = (searchParams.get("status") || "ALL").toUpperCase();
   const priorityParam = (searchParams.get("priority") || "ALL").toUpperCase();
   const initialSearch = searchParams.get("q") || "";
-  const viewMode = searchParams.get("view") || "table";
+  const rawView = searchParams.get("view") || "table";
+  const isBoardView = rawView === "board" || rawView === "kanban";
 
   const [searchInput, setSearchInput] = useState(initialSearch);
   const debouncedSearch = useDebounce(searchInput, 250);
@@ -119,7 +121,7 @@ function OutagesViewContent() {
               type="button"
               onClick={() => updateQuery("view", "table")}
               className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-medium transition ${
-                viewMode === "table"
+                !isBoardView
                   ? "bg-amber-500 text-black shadow-xs font-semibold"
                   : "text-muted-foreground hover:text-foreground"
               }`}
@@ -130,9 +132,9 @@ function OutagesViewContent() {
             </button>
             <button
               type="button"
-              onClick={() => updateQuery("view", "kanban")}
+              onClick={() => updateQuery("view", "board")}
               className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-medium transition ${
-                viewMode === "kanban"
+                isBoardView
                   ? "bg-amber-500 text-black shadow-xs font-semibold"
                   : "text-muted-foreground hover:text-foreground"
               }`}
@@ -222,6 +224,8 @@ function OutagesViewContent() {
       {/* Outage Data View */}
       {isLoading ? (
         <OutagesSkeleton />
+      ) : isBoardView ? (
+        <OutagesKanban outages={filteredOutages} isLoading={isLoading} />
       ) : (
         <OutagesTable
           outages={filteredOutages}

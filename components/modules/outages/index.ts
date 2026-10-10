@@ -1,3 +1,4 @@
+export * from "./OutagesKanban";
 export * from "./OutagesSkeleton";
 export * from "./OutagesTable";
 export * from "./OutagesView";

@@ -28,7 +28,8 @@
         "useSemanticElements": "off",
         "useFocusableInteractive": "off",
         "useAriaPropsForRole": "off",
-        "noRedundantRoles": "off"
+        "noRedundantRoles": "off",
+        "noStaticElementInteractions": "off"
       },
       "suspicious": {
         "noArrayIndexKey": "off",

@@ -2,7 +2,7 @@
 
 import { GoogleLogin } from "@react-oauth/google";
 import { useForm } from "@tanstack/react-form";
-import { Eye, EyeOff, Zap } from "lucide-react";
+import { Eye, EyeOff, Radio, ShieldAlert, User, Zap } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -19,12 +19,78 @@ import { toast } from "@/components/ui/toast";
 import { decodeJwt, useGoogleLogin, useLogin } from "@/hooks/auth.hook";
 import { loginSchema } from "@/validation/auth.validation";
 
+const DEMO_ACCOUNTS = [
+  {
+    role: "ADMIN",
+    label: "Admin",
+    subtext: "System Root & RBAC",
+    email: "admin@gridwatch.com",
+    password: "Admin1234!",
+    badgeClass: "bg-rose-500/10 text-rose-600 border-rose-500/20",
+    icon: ShieldAlert,
+  },
+  {
+    role: "OPERATOR",
+    label: "Operator",
+    subtext: "Dispatch & Telemetry",
+    email: "sarkar.sumon.fiverr@gmail.com",
+    password: "Admin1234!",
+    badgeClass: "bg-amber-500/10 text-amber-600 border-amber-500/20",
+    icon: Radio,
+  },
+  {
+    role: "CUSTOMER",
+    label: "Customer",
+    subtext: "Reports & bKash SLA",
+    email: "jane.doe@gridwatch.com",
+    password: "Admin1234!",
+    badgeClass: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20",
+    icon: User,
+  },
+] as const;
+
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const [activeDemoRole, setActiveDemoRole] = useState<string | null>(null);
   const router = useRouter();
 
   const { mutate: login, isPending: isLoginPending } = useLogin();
   const { mutate: googleAuth } = useGoogleLogin();
+
+  const handleOneClickLogin = (demo: (typeof DEMO_ACCOUNTS)[number]) => {
+    setActiveDemoRole(demo.role);
+
+    // Directly authenticate in the background without populating or revealing credentials in input fields
+    login(
+      { email: demo.email, password: demo.password },
+      {
+        onSuccess: (res) => {
+          toast.add({
+            title: `Instant Access: ${demo.label}`,
+            description: "Role authentication granted.",
+            type: "success",
+          });
+
+          const decoded = decodeJwt(res.data.accessToken);
+          if (decoded?.role === "ADMIN") {
+            router.push("/admin");
+          } else if (decoded?.role === "OPERATOR") {
+            router.push("/operator");
+          } else {
+            router.push("/customer");
+          }
+        },
+        onError: (err) => {
+          setActiveDemoRole(null);
+          toast.add({
+            title: "Demo Authorization Failure",
+            description: err.message,
+            type: "error",
+          });
+        },
+      },
+    );
+  };
 
   const form = useForm({
     defaultValues: {
@@ -78,6 +144,69 @@ export function LoginForm() {
         <p className="text-xs text-muted-foreground">
           Outage management and grid telemetry operations
         </p>
+      </div>
+
+      {/* One-Click Role Login Panel without credential exposure */}
+      <div className="rounded-xl border border-border bg-card/60 p-4 space-y-3">
+        <div className="flex items-center justify-between">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground font-mono">
+            One-Click Demo Access
+          </span>
+          <span className="text-[10px] font-mono text-muted-foreground/80">
+            Instant Secure Sign-In
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          {DEMO_ACCOUNTS.map((demo) => {
+            const Icon = demo.icon;
+            const isTargetPending =
+              activeDemoRole === demo.role && isLoginPending;
+
+            return (
+              <button
+                key={demo.role}
+                type="button"
+                disabled={isLoginPending}
+                onClick={() => handleOneClickLogin(demo)}
+                className={`group text-left p-2.5 rounded-lg border transition-all hover:border-amber-500/40 hover:bg-muted/40 disabled:opacity-60 cursor-pointer ${
+                  activeDemoRole === demo.role
+                    ? "border-amber-500 bg-amber-500/5 ring-1 ring-amber-500/20"
+                    : "border-border bg-card"
+                }`}
+              >
+                <div className="flex items-center justify-between gap-1 mb-1">
+                  <span
+                    className={`inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded border font-mono ${demo.badgeClass}`}
+                  >
+                    <Icon className="h-2.5 w-2.5" />
+                    {demo.label}
+                  </span>
+                  {isTargetPending && (
+                    <Spinner className="h-3 w-3 text-amber-500" />
+                  )}
+                </div>
+                <p className="text-[11px] font-medium text-foreground truncate">
+                  {demo.label} Portal
+                </p>
+                <p className="text-[10px] text-muted-foreground truncate">
+                  {demo.subtext}
+                </p>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="relative">
+        <div className="absolute inset-0 flex items-center">
+          <div className="w-full border-t border-border" />
+        </div>
+        <div className="relative flex justify-center text-xs uppercase">
+          <span className="bg-card px-2 text-muted-foreground text-[10px] tracking-wider">
+            Or Standard Credentials
+          </span>
+        </div>
       </div>
 
       <form

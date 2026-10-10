@@ -12,8 +12,10 @@ export function setStoredToken(token: string | null) {
   if (typeof window === "undefined") return;
   if (token) {
     localStorage.setItem("gridwatch_token", token);
+    document.cookie = `gridwatch_token=${token}; path=/; max-age=2592000; SameSite=Lax`;
   } else {
     localStorage.removeItem("gridwatch_token");
+    document.cookie = "gridwatch_token=; path=/; max-age=0; SameSite=Lax";
   }
 }
 

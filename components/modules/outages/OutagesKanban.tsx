@@ -260,25 +260,30 @@ export default function OutagesKanban({
                         <span className="truncate">{locationName}</span>
                       </div>
 
-                      {/* Direct Dispatch Crew Action */}
-                      {(outage.status === "REPORTED" ||
-                        outage.status === "ACKNOWLEDGED") && (
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            const params = new URLSearchParams(
-                              window.location.search,
-                            );
-                            params.set("assign", outage.id);
-                            router.push(`?${params.toString()}`);
-                          }}
-                          className="w-full mt-0.5 h-7 rounded-md bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/30 text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
-                        >
-                          <Zap className="h-3 w-3" />
-                          <span>Dispatch Crew</span>
-                        </button>
-                      )}
+                      {/* Direct Dispatch Crew / Reassign Action */}
+                      {outage.status !== "RESTORED" &&
+                        outage.status !== "CLOSED" && (
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const params = new URLSearchParams(
+                                window.location.search,
+                              );
+                              params.set("assign", outage.id);
+                              router.push(`?${params.toString()}`);
+                            }}
+                            className="w-full mt-0.5 h-7 rounded-md bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/30 text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                          >
+                            <Zap className="h-3 w-3" />
+                            <span>
+                              {outage.status === "ASSIGNED" ||
+                              outage.status === "IN_PROGRESS"
+                                ? "Reassign Crew"
+                                : "Dispatch Crew"}
+                            </span>
+                          </button>
+                        )}
 
                       {/* Footer metadata */}
                       <div className="flex items-center justify-between pt-1 border-t border-border/60 text-[10px] text-muted-foreground">

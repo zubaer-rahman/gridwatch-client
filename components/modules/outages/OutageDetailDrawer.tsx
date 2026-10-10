@@ -450,6 +450,30 @@ export default function OutageDetailDrawer({
                 </>
               )}
 
+              {(outage.status === "ASSIGNED" ||
+                outage.status === "IN_PROGRESS") &&
+                role === "ADMIN" && (
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => {
+                      if (onAssign) {
+                        onAssign(outage.id);
+                      } else {
+                        const params = new URLSearchParams(
+                          searchParams.toString(),
+                        );
+                        params.set("assign", outage.id);
+                        router.push(`?${params.toString()}`);
+                      }
+                    }}
+                    className="text-xs border-amber-500/30 text-amber-500 hover:bg-amber-500/10 gap-1.5 font-medium cursor-pointer"
+                  >
+                    <Zap className="h-3.5 w-3.5" />
+                    <span>Reassign Operator</span>
+                  </Button>
+                )}
+
               {outage.status === "ASSIGNED" &&
                 (role === "OPERATOR" || role === "ADMIN") && (
                   <Button

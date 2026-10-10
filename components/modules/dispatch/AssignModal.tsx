@@ -2,7 +2,7 @@
 
 import { Check, Mail, Phone, UserCheck, X, Zap } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PriorityLabel from "@/components/modules/outages/PriorityLabel";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -25,6 +25,12 @@ export default function AssignModal() {
     assignOutageId || "",
   );
   const outage = outageData?.data;
+
+  useEffect(() => {
+    if (!selectedOperatorId && outage?.assignments?.[0]?.operatorId) {
+      setSelectedOperatorId(outage.assignments[0].operatorId);
+    }
+  }, [outage, selectedOperatorId]);
 
   // Fetch real OPERATOR users
   const { data: usersData, isLoading: isLoadingUsers } = useUsers({
@@ -197,6 +203,13 @@ export default function AssignModal() {
                             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                             Active
                           </span>
+                          {outage?.assignments?.some(
+                            (a) => a.operatorId === op.id,
+                          ) && (
+                            <span className="inline-flex items-center gap-1 text-[10px] px-1.5 py-0.2 rounded-full bg-blue-500/10 text-blue-500 font-medium">
+                              Currently Assigned
+                            </span>
+                          )}
                         </div>
                         <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
                           <span className="flex items-center gap-1">

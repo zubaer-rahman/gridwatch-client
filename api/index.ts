@@ -1,2 +1,1 @@
-// API barrel exports
-export {};
+export * from "./auth.api";

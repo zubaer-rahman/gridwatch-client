@@ -1,2 +1,1 @@
-// Validation barrel exports
-export {};
+export * from "./auth.validation";

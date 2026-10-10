@@ -27,6 +27,25 @@ export interface OutageReport {
   areaId: string;
   area?: Area | null;
   outageId?: string | null;
+  outage?: {
+    id: string;
+    status: OutageStatus;
+    priority: Priority;
+    estimatedRestorationTime?: string | null;
+    assignments?: {
+      operator?: {
+        id: string;
+        name: string;
+        contactNumber?: string | null;
+      } | null;
+    }[];
+  } | null;
+  payment?: {
+    id: string;
+    amount: number;
+    status: string;
+    transactionId?: string | null;
+  } | null;
   description?: string | null;
   isPriority: boolean;
   createdAt: string;

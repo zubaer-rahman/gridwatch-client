@@ -1,25 +1,30 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
+import CustomerPortalView from "@/components/modules/customer/CustomerPortalView";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const metadata: Metadata = {
   title: "Customer Portal | GridWatch",
-  description: "Consumer power outage reporting and status updates",
+  description: "Consumer power outage reporting and real-time status updates",
 };
 
 export default function CustomerPage() {
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight">Customer Portal</h1>
-        <p className="text-sm text-muted-foreground">
-          Check local electricity status, file reports, and track restoration
-        </p>
-      </div>
-      <div className="rounded-xl border border-border bg-card p-6">
-        <p className="text-sm text-muted-foreground">
-          Customer portal initialized. Outage reporting and priority payment
-          features will load in subsequent milestones.
-        </p>
-      </div>
-    </div>
+    <Suspense
+      fallback={
+        <div className="space-y-6">
+          <Skeleton className="h-10 w-64" />
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <Skeleton className="h-28 rounded-xl" />
+            <Skeleton className="h-28 rounded-xl" />
+            <Skeleton className="h-28 rounded-xl" />
+          </div>
+          <Skeleton className="h-64 rounded-xl" />
+          <Skeleton className="h-64 rounded-xl" />
+        </div>
+      }
+    >
+      <CustomerPortalView />
+    </Suspense>
   );
 }

@@ -5,5 +5,6 @@ export * from "./audit.type";
 export * from "./auth.type";
 export * from "./grid.type";
 export * from "./outage.type";
+export * from "./report.type";
 export * from "./sidebar.type";
 export * from "./user.type";

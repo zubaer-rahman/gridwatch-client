@@ -4,6 +4,7 @@ export * from "./assignment.type";
 export * from "./audit.type";
 export * from "./auth.type";
 export * from "./grid.type";
+export * from "./notification.type";
 export * from "./outage.type";
 export * from "./payment.type";
 export * from "./report.type";

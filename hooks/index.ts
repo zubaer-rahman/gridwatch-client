@@ -2,6 +2,7 @@ export * from "./admin.hook";
 export * from "./assignment.hook";
 export * from "./auth.hook";
 export * from "./grid.hook";
+export * from "./notification.hook";
 export * from "./outage.hook";
 export * from "./payment.hook";
 export * from "./report.hook";

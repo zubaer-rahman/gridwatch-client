@@ -1,8 +1,8 @@
 "use client";
 
-import { Bell, LogOut, Menu, Search, User } from "lucide-react";
-import Link from "next/link";
+import { LogOut, Menu, Search, User } from "lucide-react";
 import { usePathname } from "next/navigation";
+import NotificationCenter from "@/components/dashboard/NotificationCenter";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -75,21 +75,8 @@ export function Header({ onToggleSidebar }: HeaderProps) {
           </kbd>
         </button>
 
-        {/* Notifications Icon Placeholder */}
-        <Link
-          href={
-            user?.role === "ADMIN"
-              ? "/admin"
-              : user?.role === "OPERATOR"
-                ? "/operator"
-                : "/customer"
-          }
-          className="relative inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground transition hover:bg-muted hover:text-foreground"
-          aria-label="View notifications"
-        >
-          <Bell className="h-4 w-4" />
-          <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-amber-500 ring-2 ring-card" />
-        </Link>
+        {/* Live Notification Center */}
+        <NotificationCenter />
 
         {/* Theme Toggle */}
         <ThemeToggle />

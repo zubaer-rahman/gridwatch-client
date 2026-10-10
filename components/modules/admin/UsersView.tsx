@@ -21,6 +21,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "@/components/ui/toast";
 import { useAdminUsers, useUpdateUserStatus } from "@/hooks/admin.hook";
 import { useDebounce } from "@/hooks/use-debounce";
+import { extractDataArray, extractMeta } from "@/lib/utils";
 import type { AdminUser, Role } from "@/types";
 import { formatDhakaDate } from "@/utils/outage.utils";
 
@@ -54,8 +55,8 @@ export default function UsersView() {
     isError,
     refetch,
   } = useAdminUsers(queryParams);
-  const users = usersResponse?.data || [];
-  const meta = usersResponse?.meta;
+  const users = extractDataArray<AdminUser>(usersResponse?.data);
+  const meta = extractMeta(usersResponse?.data) || usersResponse?.meta;
   const totalPages = meta ? Math.ceil(meta.total / limit) : 1;
 
   const updateStatusMutation = useUpdateUserStatus();

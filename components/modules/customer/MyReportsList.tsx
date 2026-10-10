@@ -17,6 +17,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useMyReports } from "@/hooks/report.hook";
+import { extractDataArray } from "@/lib/utils";
 import type { OutageReport } from "@/types";
 import {
   formatBDT,
@@ -37,7 +38,7 @@ export default function MyReportsList({
 
   const { data: reportsResponse, isLoading, isError, refetch } = useMyReports();
 
-  const reports = reportsResponse?.data || [];
+  const reports = extractDataArray<OutageReport>(reportsResponse?.data);
 
   return (
     <div className="rounded-2xl border border-border bg-card p-6 shadow-xs space-y-5">

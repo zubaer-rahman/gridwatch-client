@@ -21,6 +21,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAdminStatistics, useAdminUsers } from "@/hooks/admin.hook";
+import { extractDataArray } from "@/lib/utils";
+import type { AdminUser } from "@/types";
 import { formatBDT, formatDhakaDate } from "@/utils/outage.utils";
 
 export default function AdminPortalView() {
@@ -38,7 +40,7 @@ export default function AdminPortalView() {
   });
 
   const stats = statsData?.data;
-  const recentUsers = usersData?.data || [];
+  const recentUsers = extractDataArray<AdminUser>(usersData?.data);
 
   return (
     <div className="space-y-8">

@@ -14,6 +14,7 @@ import {
   useMarkNotificationAsRead,
   useNotifications,
 } from "@/hooks/notification.hook";
+import { extractDataArray } from "@/lib/utils";
 import type { NotificationItem } from "@/types";
 import { formatRelativeTime } from "@/utils/outage.utils";
 
@@ -21,7 +22,7 @@ export default function NotificationCenter() {
   const [isOpen, setIsOpen] = useState(false);
 
   const { data: notifResponse, isLoading } = useNotifications();
-  const notifications = notifResponse?.data || [];
+  const notifications = extractDataArray<NotificationItem>(notifResponse?.data);
 
   const markAsReadMutation = useMarkNotificationAsRead();
 

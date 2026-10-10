@@ -27,7 +27,9 @@ import {
 import { useCurrentUser } from "@/hooks/auth.hook";
 import { useAreas, useZones } from "@/hooks/grid.hook";
 import { useOutages } from "@/hooks/outage.hook";
+import { extractDataArray } from "@/lib/utils";
 import { useTheme } from "@/providers/ThemeProvider";
+import type { Area, DistributionZone, Outage } from "@/types";
 
 export default function CommandPalette() {
   const [open, setOpen] = useState(false);
@@ -40,9 +42,9 @@ export default function CommandPalette() {
   const { data: areasResponse } = useAreas();
   const { data: zonesResponse } = useZones();
 
-  const outages = outagesResponse?.data || [];
-  const areas = areasResponse?.data || [];
-  const zones = zonesResponse?.data || [];
+  const outages = extractDataArray<Outage>(outagesResponse?.data);
+  const areas = extractDataArray<Area>(areasResponse?.data);
+  const zones = extractDataArray<DistributionZone>(zonesResponse?.data);
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {

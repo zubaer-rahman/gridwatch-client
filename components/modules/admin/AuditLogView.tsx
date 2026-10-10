@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAuditLogs } from "@/hooks/admin.hook";
 import { useDebounce } from "@/hooks/use-debounce";
+import { extractDataArray, extractMeta } from "@/lib/utils";
 import type { AuditLog } from "@/types";
 import { formatDhakaDate, formatRelativeTime } from "@/utils/outage.utils";
 
@@ -49,8 +50,8 @@ export default function AuditLogView() {
     refetch,
   } = useAuditLogs(queryParams);
 
-  const logs = logsResponse?.data || [];
-  const meta = logsResponse?.meta;
+  const logs = extractDataArray<AuditLog>(logsResponse?.data);
+  const meta = extractMeta(logsResponse?.data) || logsResponse?.meta;
   const totalPages = meta ? Math.ceil(meta.total / limit) : 1;
 
   // Filter client-side if search term is active (backend doesn't filter search directly on audit logs)

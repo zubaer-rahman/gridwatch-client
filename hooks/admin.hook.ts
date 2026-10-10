@@ -5,10 +5,16 @@ import {
   createInternalUser,
   getAdminStatistics,
   getAdminUsers,
+  getAuditLogs,
   updateUserDetails,
   updateUserStatus,
 } from "@/api/admin.api";
-import type { AdminUserQuery, CreateUserInput, UpdateUserInput } from "@/types";
+import type {
+  AdminUserQuery,
+  AuditLogQuery,
+  CreateUserInput,
+  UpdateUserInput,
+} from "@/types";
 
 export function useAdminStatistics() {
   return useQuery({
@@ -62,5 +68,12 @@ export function useUpdateUserDetails() {
       queryClient.invalidateQueries({ queryKey: ["admin", "statistics"] });
       queryClient.invalidateQueries({ queryKey: ["users"] });
     },
+  });
+}
+
+export function useAuditLogs(query?: AuditLogQuery) {
+  return useQuery({
+    queryKey: ["admin", "audit-logs", query],
+    queryFn: () => getAuditLogs(query),
   });
 }

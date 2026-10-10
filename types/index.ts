@@ -1,6 +1,7 @@
 export * from "./admin.type";
 export * from "./api.type";
 export * from "./assignment.type";
+export * from "./audit.type";
 export * from "./auth.type";
 export * from "./grid.type";
 export * from "./outage.type";

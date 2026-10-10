@@ -4,6 +4,8 @@ import type {
   AdminUser,
   AdminUserQuery,
   ApiResponse,
+  AuditLog,
+  AuditLogQuery,
   CreateUserInput,
   UpdateUserInput,
 } from "@/types";
@@ -46,5 +48,13 @@ export function updateUserDetails(
   return apiClient<ApiResponse<AdminUser>>(`/users/${id}`, {
     method: "PATCH",
     body: payload,
+  });
+}
+
+export function getAuditLogs(
+  query?: AuditLogQuery,
+): Promise<ApiResponse<AuditLog[]>> {
+  return apiClient<ApiResponse<AuditLog[]>>("/admin/audit-logs", {
+    query,
   });
 }

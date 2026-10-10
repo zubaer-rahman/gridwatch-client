@@ -1,6 +1,7 @@
 "use client";
 
 import { type ReactNode, useState } from "react";
+import CommandPalette from "@/components/dashboard/CommandPalette";
 import { Header } from "@/components/dashboard/Header";
 import { Sidebar } from "@/components/dashboard/Sidebar";
 
@@ -13,6 +14,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
 
   return (
     <div className="flex min-h-screen bg-background">
+      <CommandPalette />
       {/* Mobile Sidebar Backdrop */}
       {isSidebarOpen && (
         <div

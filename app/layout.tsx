@@ -28,7 +28,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       className={`${inter.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen bg-background font-sans text-foreground antialiased selection:bg-amber-500 selection:text-black">
+      <body
+        suppressHydrationWarning
+        className="min-h-screen bg-background font-sans text-foreground antialiased selection:bg-amber-500 selection:text-black"
+      >
         <Providers>
           {children}
           <Toaster />

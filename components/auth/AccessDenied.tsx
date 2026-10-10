@@ -18,7 +18,10 @@ export function AccessDenied({ allowedRoles, userRole }: AccessDeniedProps) {
   else if (userRole === "CUSTOMER") targetDashboard = "/customer";
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center p-6 text-center">
+    <div
+      suppressHydrationWarning
+      className="flex min-h-screen w-full flex-col items-center justify-center p-6 text-center"
+    >
       <div className="max-w-md space-y-5 rounded-2xl border border-destructive/20 bg-card p-8 shadow-lg">
         <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-destructive/10 text-destructive ring-1 ring-destructive/20">
           <ShieldAlert className="h-7 w-7" />

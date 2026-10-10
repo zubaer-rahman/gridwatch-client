@@ -25,7 +25,15 @@ export function useAdminStatistics() {
 
 export function useAdminUsers(query?: AdminUserQuery) {
   return useQuery({
-    queryKey: ["admin", "users", query],
+    queryKey: [
+      "admin",
+      "users",
+      query?.role ?? "ALL",
+      query?.status ?? "ALL",
+      query?.search ?? "",
+      query?.page ?? 1,
+      query?.limit ?? 10,
+    ],
     queryFn: () => getAdminUsers(query),
   });
 }

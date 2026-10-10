@@ -148,10 +148,18 @@ export default function UsersView() {
               }}
               className="bg-transparent text-xs font-medium text-foreground focus:outline-hidden cursor-pointer"
             >
-              <option value="ALL">All Roles</option>
-              <option value="ADMIN">ADMIN</option>
-              <option value="OPERATOR">OPERATOR</option>
-              <option value="CUSTOMER">CUSTOMER</option>
+              <option value="ALL" className="bg-card text-foreground">
+                All Roles
+              </option>
+              <option value="ADMIN" className="bg-card text-foreground">
+                ADMIN
+              </option>
+              <option value="OPERATOR" className="bg-card text-foreground">
+                OPERATOR
+              </option>
+              <option value="CUSTOMER" className="bg-card text-foreground">
+                CUSTOMER
+              </option>
             </select>
           </div>
 
@@ -164,9 +172,15 @@ export default function UsersView() {
               }}
               className="bg-transparent text-xs font-medium text-foreground focus:outline-hidden cursor-pointer"
             >
-              <option value="ALL">All Statuses</option>
-              <option value="ACTIVE">Active Only</option>
-              <option value="INACTIVE">Suspended Only</option>
+              <option value="ALL" className="bg-card text-foreground">
+                All Statuses
+              </option>
+              <option value="ACTIVE" className="bg-card text-foreground">
+                Active Only
+              </option>
+              <option value="INACTIVE" className="bg-card text-foreground">
+                Suspended Only
+              </option>
             </select>
           </div>
         </div>

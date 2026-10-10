@@ -1,25 +1,31 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
+import AdminPortalView from "@/components/modules/admin/AdminPortalView";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const metadata: Metadata = {
   title: "System Overview | GridWatch Admin",
-  description: "Administrative telemetry and governance portal",
+  description:
+    "Administrative telemetry, sector statistics, and governance portal",
 };
 
 export default function AdminPage() {
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight">System Overview</h1>
-        <p className="text-sm text-muted-foreground">
-          Administrative control center and distribution sector governance
-        </p>
-      </div>
-      <div className="rounded-xl border border-border bg-card p-6">
-        <p className="text-sm text-muted-foreground">
-          Admin portal initialized. Statistics and audit log modules will load
-          in subsequent milestones.
-        </p>
-      </div>
-    </div>
+    <Suspense
+      fallback={
+        <div className="space-y-6">
+          <Skeleton className="h-10 w-64" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Skeleton className="h-28 rounded-xl" />
+            <Skeleton className="h-28 rounded-xl" />
+            <Skeleton className="h-28 rounded-xl" />
+            <Skeleton className="h-28 rounded-xl" />
+          </div>
+          <Skeleton className="h-64 rounded-xl" />
+        </div>
+      }
+    >
+      <AdminPortalView />
+    </Suspense>
   );
 }

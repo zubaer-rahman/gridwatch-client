@@ -27,7 +27,7 @@ export const operatorRoutes: NavGroup[] = [
       },
       {
         title: "Grid Topology",
-        url: "/operator/grid-network",
+        url: "/operator/grid",
         icon: Network,
       },
     ],

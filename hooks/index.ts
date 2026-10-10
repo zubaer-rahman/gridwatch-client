@@ -1,3 +1,4 @@
+export * from "./admin.hook";
 export * from "./assignment.hook";
 export * from "./auth.hook";
 export * from "./grid.hook";

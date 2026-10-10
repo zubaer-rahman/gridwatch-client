@@ -23,7 +23,7 @@ export const adminRoutes: NavGroup[] = [
       },
       {
         title: "Grid Network",
-        url: "/admin/grid-network",
+        url: "/admin/grid",
         icon: Network,
       },
     ],

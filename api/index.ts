@@ -1,3 +1,4 @@
+export * from "./admin.api";
 export * from "./assignment.api";
 export * from "./auth.api";
 export * from "./grid.api";

@@ -29,7 +29,8 @@
         "useFocusableInteractive": "off",
         "useAriaPropsForRole": "off",
         "noRedundantRoles": "off",
-        "noStaticElementInteractions": "off"
+        "noStaticElementInteractions": "off",
+        "useKeyWithClickEvents": "off"
       },
       "suspicious": {
         "noArrayIndexKey": "off",

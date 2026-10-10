@@ -3,6 +3,7 @@
 import { Kanban, List, Plus, RefreshCw, Search } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useMemo, useState } from "react";
+import OutageDetailDrawer from "@/components/modules/outages/OutageDetailDrawer";
 import OutagesKanban from "@/components/modules/outages/OutagesKanban";
 import OutagesSkeleton from "@/components/modules/outages/OutagesSkeleton";
 import OutagesTable from "@/components/modules/outages/OutagesTable";
@@ -240,6 +241,9 @@ function OutagesViewContent() {
           }}
         />
       )}
+
+      {/* Outage Detail Drawer */}
+      <OutageDetailDrawer />
     </div>
   );
 }

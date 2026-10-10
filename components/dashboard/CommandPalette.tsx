@@ -84,13 +84,13 @@ export default function CommandPalette() {
               }}
             >
               <Plus className="mr-2 h-4 w-4 text-amber-500" />
-              <span>Log New Outage Incident</span>
+              <span>Log New Outage</span>
               <CommandShortcut>↵</CommandShortcut>
             </CommandItem>
           ) : (
             <CommandItem onSelect={() => handleSelectNav("/customer")}>
               <AlertTriangle className="mr-2 h-4 w-4 text-amber-500" />
-              <span>Report Power Interruption</span>
+              <span>Report Outage</span>
               <CommandShortcut>↵</CommandShortcut>
             </CommandItem>
           )}
@@ -178,7 +178,7 @@ export default function CommandPalette() {
                 onSelect={() => handleSelectNav("/customer/reports")}
               >
                 <FileText className="mr-2 h-4 w-4 text-muted-foreground" />
-                <span>My Incident Reports</span>
+                <span>My Outage Reports</span>
               </CommandItem>
             </>
           )}

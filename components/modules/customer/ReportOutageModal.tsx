@@ -99,10 +99,10 @@ export default function ReportOutageModal({
             </div>
             <div>
               <h2 className="text-lg font-semibold tracking-tight text-foreground">
-                Report Power Interruption
+                Report Outage
               </h2>
               <p className="text-xs text-muted-foreground">
-                Log a real-time electrical disruption for your premise area
+                Submit an outage report for your local area
               </p>
             </div>
           </div>
@@ -188,7 +188,7 @@ export default function ReportOutageModal({
               <span>
                 {createReportMutation.isPending
                   ? "Submitting..."
-                  : "Submit Incident Report"}
+                  : "Submit Outage Report"}
               </span>
             </Button>
           </div>

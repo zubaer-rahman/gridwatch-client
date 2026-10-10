@@ -141,8 +141,8 @@ export default function AreaStatusCard({
               <div className="flex items-center gap-2">
                 <AlertTriangle className="h-5 w-5 text-destructive shrink-0" />
                 <span className="text-sm font-semibold text-foreground">
-                  Active Disruption:{" "}
-                  {activeOutage.description || "Unscheduled Interruption"}
+                  Active Outage:{" "}
+                  {activeOutage.description || "Unscheduled Outage"}
                 </span>
               </div>
               <Badge variant="outline" className="text-xs font-mono w-fit">
@@ -353,7 +353,7 @@ export default function AreaStatusCard({
               className="gap-1.5 self-start sm:self-auto"
             >
               <AlertTriangle className="h-3.5 w-3.5 text-amber-500" />
-              <span>Experiencing an Outage? Report Here</span>
+              <span>Report Outage</span>
             </Button>
           </div>
         </div>

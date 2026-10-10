@@ -134,7 +134,7 @@ export default function AssignModal() {
                   <PriorityLabel priority={outage.priority} />
                 </div>
                 <p className="text-xs text-muted-foreground line-clamp-2">
-                  {outage.description || "Active feeder incident reported."}
+                  {outage.description || "Active feeder outage reported."}
                 </p>
                 <div className="flex items-center gap-2 text-[11px] font-mono text-muted-foreground pt-1 border-t border-border/50 mt-1">
                   <span>

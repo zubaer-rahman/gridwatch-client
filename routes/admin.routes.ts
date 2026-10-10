@@ -17,7 +17,7 @@ export const adminRoutes: NavGroup[] = [
         icon: LayoutDashboard,
       },
       {
-        title: "Outage Incidents",
+        title: "Outages",
         url: "/admin/outages",
         icon: AlertTriangle,
       },

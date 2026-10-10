@@ -11,7 +11,7 @@ export const customerRoutes: NavGroup[] = [
         icon: Home,
       },
       {
-        title: "Incident Reports",
+        title: "Outage Reports",
         url: "/customer/reports",
         icon: FileText,
       },

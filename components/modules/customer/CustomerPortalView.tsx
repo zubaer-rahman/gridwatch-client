@@ -68,7 +68,7 @@ export default function CustomerPortalView() {
           className="gap-2 self-start md:self-auto"
         >
           <AlertTriangle className="h-4 w-4 text-amber-300" />
-          <span>Report Power Interruption</span>
+          <span>Report Outage</span>
         </Button>
       </div>
 
@@ -77,7 +77,7 @@ export default function CustomerPortalView() {
         <div className="p-5 rounded-xl border border-border bg-card space-y-1">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground font-mono">
-              Active Incidents
+              Active Outages
             </span>
             <div className="p-2 rounded-lg bg-amber-500/10 text-amber-500">
               <Zap className="h-4 w-4" />
@@ -87,14 +87,14 @@ export default function CustomerPortalView() {
             {activeReportsCount}
           </div>
           <p className="text-xs text-muted-foreground">
-            Dispatches currently under field repair
+            Outages currently under investigation or repair
           </p>
         </div>
 
         <div className="p-5 rounded-xl border border-border bg-card space-y-1">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground font-mono">
-              Resolved Tickets
+              Resolved Outages
             </span>
             <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-500">
               <CheckCircle2 className="h-4 w-4" />
@@ -104,7 +104,7 @@ export default function CustomerPortalView() {
             {resolvedReportsCount}
           </div>
           <p className="text-xs text-muted-foreground">
-            Lifetime restored power interruptions
+            Lifetime resolved and restored outages
           </p>
         </div>
 
@@ -133,7 +133,7 @@ export default function CustomerPortalView() {
         onOpenReportModal={() => setIsReportModalOpen(true)}
       />
 
-      {/* Incident Reports Chronicle */}
+      {/* Outage Reports Chronicle */}
       <MyReportsList onOpenReportModal={() => setIsReportModalOpen(true)} />
 
       {/* Outage Reporting Modal */}

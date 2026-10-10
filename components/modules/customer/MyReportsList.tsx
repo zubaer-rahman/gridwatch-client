@@ -45,7 +45,7 @@ export default function MyReportsList({
       <div className="flex items-center justify-between pb-3 border-b border-border">
         <div>
           <h2 className="text-lg font-bold tracking-tight text-foreground">
-            My Incident Reports
+            My Outage Reports
           </h2>
           <p className="text-xs text-muted-foreground">
             Historical chronicle and real-time status of your premise reports
@@ -86,7 +86,7 @@ export default function MyReportsList({
         <div className="p-8 text-center space-y-3">
           <AlertCircle className="h-7 w-7 text-destructive mx-auto" />
           <p className="text-sm font-semibold text-foreground">
-            Failed to retrieve incident reports
+            Failed to retrieve outage reports
           </p>
           <Button variant="outline" size="sm" onClick={() => refetch()}>
             Retry
@@ -96,10 +96,10 @@ export default function MyReportsList({
         <div className="p-8 text-center space-y-3">
           <FileText className="h-8 w-8 text-muted-foreground mx-auto" />
           <h3 className="text-sm font-semibold text-foreground">
-            No incident reports recorded
+            No outage reports recorded
           </h3>
           <p className="text-xs text-muted-foreground max-w-sm mx-auto">
-            Your electrical premise has not filed any power disruptions.
+            Your electrical premise has not filed any outage reports.
           </p>
           <Button
             variant="outline"
@@ -108,7 +108,7 @@ export default function MyReportsList({
             className="gap-1.5"
           >
             <Zap className="h-3.5 w-3.5 text-amber-500" />
-            <span>File New Incident Report</span>
+            <span>Report Outage</span>
           </Button>
         </div>
       ) : (
@@ -140,7 +140,7 @@ export default function MyReportsList({
                 <div className="space-y-1.5 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="font-semibold text-sm text-foreground">
-                      {report.description || "Power Disruption at Premise"}
+                      {report.description || "Power Outage at Premise"}
                     </span>
 
                     {/* Priority Badge */}

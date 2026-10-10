@@ -4,7 +4,7 @@ import CustomerPortalView from "@/components/modules/customer/CustomerPortalView
 import { Skeleton } from "@/components/ui/skeleton";
 
 export const metadata: Metadata = {
-  title: "My Incident Reports | GridWatch",
+  title: "My Outage Reports | GridWatch",
   description: "Consumer power outage reports and real-time status tracking",
 };
 

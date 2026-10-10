@@ -86,7 +86,7 @@ function PaymentCallbackContent() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
               <Link href="/customer/reports" className="w-full sm:w-auto">
                 <Button className="w-full gap-2">
-                  <span>View Incident Tickets</span>
+                  <span>View Outage Reports</span>
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
@@ -116,7 +116,7 @@ function PaymentCallbackContent() {
 
             <div className="p-4 rounded-xl border border-destructive/20 bg-destructive/5 text-xs text-muted-foreground text-left space-y-1">
               <p className="font-medium text-foreground">
-                Don&apos;t worry — your incident report is still recorded under
+                Don&apos;t worry — your outage report is still recorded under
                 Standard SLA.
               </p>
               <p>
@@ -128,7 +128,7 @@ function PaymentCallbackContent() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
               <Link href="/customer/reports" className="w-full sm:w-auto">
                 <Button className="w-full gap-2">
-                  <span>Return to Incident Reports</span>
+                  <span>Return to Outage Reports</span>
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import type { ReactNode } from "react";
-import { ThemeProvider } from "@/providers/ThemeProvider";
+import { Toaster } from "@/components/ui/toast";
+import { Providers } from "@/providers";
 import "./globals.css";
 
 const inter = Inter({
@@ -28,7 +29,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-background font-sans text-foreground antialiased selection:bg-amber-500 selection:text-black">
-        <ThemeProvider defaultTheme="dark">{children}</ThemeProvider>
+        <Providers>
+          {children}
+          <Toaster />
+        </Providers>
       </body>
     </html>
   );

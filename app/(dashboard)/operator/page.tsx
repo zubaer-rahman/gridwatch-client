@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
+import OverviewView from "@/components/modules/operator/OverviewView";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const metadata: Metadata = {
   title: "Operations Center | GridWatch Operator",
@@ -7,19 +10,21 @@ export const metadata: Metadata = {
 
 export default function OperatorPage() {
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight">Operations Center</h1>
-        <p className="text-sm text-muted-foreground">
-          Live grid telemetry, outage incident queue, and field crew dispatch
-        </p>
-      </div>
-      <div className="rounded-xl border border-border bg-card p-6">
-        <p className="text-sm text-muted-foreground">
-          Operator portal initialized. Real-time KPIs and incident views will
-          load in subsequent milestones.
-        </p>
-      </div>
-    </div>
+    <Suspense
+      fallback={
+        <div className="space-y-6">
+          <Skeleton className="h-10 w-48" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Skeleton className="h-28 rounded-xl" />
+            <Skeleton className="h-28 rounded-xl" />
+            <Skeleton className="h-28 rounded-xl" />
+            <Skeleton className="h-28 rounded-xl" />
+          </div>
+          <Skeleton className="h-96 rounded-xl" />
+        </div>
+      }
+    >
+      <OverviewView />
+    </Suspense>
   );
 }

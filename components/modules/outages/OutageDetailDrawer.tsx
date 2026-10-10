@@ -412,19 +412,21 @@ export default function OutageDetailDrawer({
             </Button>
 
             <div className="flex items-center gap-2">
-              {/* Role & status dependent actions */}
-              {outage.status === "REPORTED" && (
+              {(outage.status === "REPORTED" ||
+                outage.status === "ACKNOWLEDGED") && (
                 <>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => handleStatusTransition("ACKNOWLEDGED")}
-                    disabled={updateOutageMutation.isPending}
-                    className="text-xs gap-1.5"
-                  >
-                    <CheckCircle2 className="h-3.5 w-3.5 text-blue-500" />
-                    <span>Acknowledge</span>
-                  </Button>
+                  {outage.status === "REPORTED" && (
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => handleStatusTransition("ACKNOWLEDGED")}
+                      disabled={updateOutageMutation.isPending}
+                      className="text-xs gap-1.5"
+                    >
+                      <CheckCircle2 className="h-3.5 w-3.5 text-blue-500" />
+                      <span>Acknowledge</span>
+                    </Button>
+                  )}
                   {(role === "OPERATOR" || role === "ADMIN") && (
                     <Button
                       size="sm"
@@ -439,7 +441,7 @@ export default function OutageDetailDrawer({
                           router.push(`?${params.toString()}`);
                         }
                       }}
-                      className="text-xs bg-amber-500 text-black hover:bg-amber-400 gap-1.5 font-medium"
+                      className="text-xs bg-amber-500 text-black hover:bg-amber-400 gap-1.5 font-medium cursor-pointer"
                     >
                       <Zap className="h-3.5 w-3.5" />
                       <span>Assign Operator</span>

@@ -6,4 +6,5 @@ export * from "./notification.api";
 export * from "./outage.api";
 export * from "./payment.api";
 export * from "./report.api";
+export * from "./schedule.api";
 export * from "./user.api";

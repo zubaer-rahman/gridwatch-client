@@ -6,6 +6,8 @@ export * from "./notification.hook";
 export * from "./outage.hook";
 export * from "./payment.hook";
 export * from "./report.hook";
+export * from "./schedule.hook";
 export * from "./use-debounce";
+
 export * from "./use-mobile";
 export * from "./user.hook";

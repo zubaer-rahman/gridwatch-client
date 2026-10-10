@@ -3,6 +3,7 @@
 import {
   Activity,
   AlertTriangle,
+  CalendarClock,
   CheckCircle2,
   Clock,
   MapPin,
@@ -16,6 +17,9 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAreas } from "@/hooks/grid.hook";
 import { useOutages } from "@/hooks/outage.hook";
+import { useSchedules } from "@/hooks/schedule.hook";
+import { extractDataArray } from "@/lib/utils";
+import type { Schedule } from "@/types";
 import { formatDhakaDate, formatRelativeTime } from "@/utils/outage.utils";
 
 interface AreaStatusCardProps {
@@ -34,6 +38,15 @@ export default function AreaStatusCard({
 
   const currentArea = areas.find((a) => a.id === selectedAreaId) || areas[0];
   const activeAreaId = currentArea?.id || "";
+
+  // Query schedules for this area
+  const { data: schedulesData } = useSchedules(
+    activeAreaId ? { areaId: activeAreaId } : undefined,
+  );
+  const allSchedules = extractDataArray<Schedule>(schedulesData?.data) || [];
+  const activeOrUpcomingSchedules = allSchedules.filter(
+    (s) => s.status === "ACTIVE" || s.status === "UPCOMING",
+  );
 
   // Query outages for this area
   const { data: outagesData, isLoading: isLoadingOutages } = useOutages({
@@ -337,6 +350,60 @@ export default function AreaStatusCard({
               </span>
             </div>
           </div>
+
+          {/* Planned Maintenance & Load Shedding Advisory */}
+          {activeOrUpcomingSchedules.length > 0 && (
+            <div className="rounded-xl border border-amber-500/30 bg-amber-500/5 p-4 space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <CalendarClock className="h-4 w-4 text-amber-500" />
+                  <h4 className="text-xs font-semibold text-foreground uppercase tracking-wider font-mono">
+                    Scheduled Maintenance & Load Shedding
+                  </h4>
+                </div>
+                <Badge
+                  variant="outline"
+                  className="text-[10px] border-amber-500/40 text-amber-500 font-mono"
+                >
+                  {activeOrUpcomingSchedules.length} Planned
+                </Badge>
+              </div>
+
+              <div className="divide-y divide-border/40">
+                {activeOrUpcomingSchedules.map((sched) => (
+                  <div
+                    key={sched.id}
+                    className="py-2.5 first:pt-0 last:pb-0 flex flex-col sm:flex-row sm:items-center justify-between gap-2"
+                  >
+                    <div className="space-y-0.5">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-medium text-foreground">
+                          {sched.reason || "Scheduled Grid Maintenance"}
+                        </span>
+                        <Badge
+                          variant="outline"
+                          className={`text-[9px] font-mono px-1.5 py-0 ${
+                            sched.status === "ACTIVE"
+                              ? "bg-rose-500/10 text-rose-500 border-rose-500/30"
+                              : "bg-amber-500/10 text-amber-500 border-amber-500/30"
+                          }`}
+                        >
+                          {sched.status}
+                        </Badge>
+                      </div>
+                      <p className="text-[11px] text-muted-foreground flex items-center gap-1 font-mono">
+                        <Clock className="h-3 w-3" />
+                        <span>
+                          {formatDhakaDate(sched.startsAt)} —{" "}
+                          {formatDhakaDate(sched.endsAt)}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
             <p className="text-xs text-muted-foreground flex items-center gap-1.5">

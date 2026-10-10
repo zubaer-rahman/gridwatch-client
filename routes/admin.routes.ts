@@ -1,5 +1,6 @@
 import {
   AlertTriangle,
+  CalendarClock,
   FileText,
   LayoutDashboard,
   Network,
@@ -20,6 +21,11 @@ export const adminRoutes: NavGroup[] = [
         title: "Outages",
         url: "/admin/outages",
         icon: AlertTriangle,
+      },
+      {
+        title: "Schedules",
+        url: "/admin/schedules",
+        icon: CalendarClock,
       },
       {
         title: "Grid Network",

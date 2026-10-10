@@ -8,5 +8,6 @@ export * from "./notification.type";
 export * from "./outage.type";
 export * from "./payment.type";
 export * from "./report.type";
+export * from "./schedule.type";
 export * from "./sidebar.type";
 export * from "./user.type";

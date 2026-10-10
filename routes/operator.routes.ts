@@ -1,5 +1,6 @@
 import {
   AlertTriangle,
+  CalendarClock,
   CheckSquare,
   LayoutDashboard,
   Network,
@@ -19,6 +20,11 @@ export const operatorRoutes: NavGroup[] = [
         title: "Outage Management",
         url: "/operator/outages",
         icon: AlertTriangle,
+      },
+      {
+        title: "Schedules",
+        url: "/operator/schedules",
+        icon: CalendarClock,
       },
       {
         title: "My Dispatches",

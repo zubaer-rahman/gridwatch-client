@@ -2,6 +2,7 @@
 
 import {
   AlertTriangle,
+  CalendarClock,
   FileText,
   LayoutDashboard,
   MapPin,
@@ -126,6 +127,10 @@ export default function CommandPalette() {
                 <AlertTriangle className="mr-2 h-4 w-4 text-amber-500" />
                 <span>Outage Incidents Desk</span>
               </CommandItem>
+              <CommandItem onSelect={() => handleSelectNav("/admin/schedules")}>
+                <CalendarClock className="mr-2 h-4 w-4 text-primary" />
+                <span>Schedules & Maintenance Windows</span>
+              </CommandItem>
               <CommandItem onSelect={() => handleSelectNav("/admin/grid")}>
                 <Network className="mr-2 h-4 w-4 text-muted-foreground" />
                 <span>Grid Infrastructure Hierarchy</span>
@@ -154,6 +159,12 @@ export default function CommandPalette() {
               >
                 <AlertTriangle className="mr-2 h-4 w-4 text-amber-500" />
                 <span>Outage Incident Desk</span>
+              </CommandItem>
+              <CommandItem
+                onSelect={() => handleSelectNav("/operator/schedules")}
+              >
+                <CalendarClock className="mr-2 h-4 w-4 text-primary" />
+                <span>Schedules & Maintenance Windows</span>
               </CommandItem>
               <CommandItem
                 onSelect={() => handleSelectNav("/operator/my-work")}

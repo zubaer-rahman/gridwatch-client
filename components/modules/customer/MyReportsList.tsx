@@ -11,10 +11,13 @@ import {
   RefreshCw,
   Zap,
 } from "lucide-react";
+import { useState } from "react";
+import BkashPaymentModal from "@/components/modules/customer/BkashPaymentModal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useMyReports } from "@/hooks/report.hook";
+import type { OutageReport } from "@/types";
 import {
   formatBDT,
   formatDhakaDate,
@@ -29,6 +32,9 @@ interface MyReportsListProps {
 export default function MyReportsList({
   onOpenReportModal,
 }: MyReportsListProps) {
+  const [selectedReportForPayment, setSelectedReportForPayment] =
+    useState<OutageReport | null>(null);
+
   const { data: reportsResponse, isLoading, isError, refetch } = useMyReports();
 
   const reports = reportsResponse?.data || [];
@@ -186,15 +192,25 @@ export default function MyReportsList({
                         bKash Paid {formatBDT(report.payment.amount)}
                       </span>
                     ) : (
-                      <span className="inline-flex items-center gap-1 text-xs font-mono text-amber-600 dark:text-amber-400 bg-amber-500/10 px-2 py-1 rounded-md">
-                        <CreditCard className="h-3.5 w-3.5" />
-                        ৳200 Priority Ticket
-                      </span>
+                      <Button
+                        size="sm"
+                        onClick={() => setSelectedReportForPayment(report)}
+                        className="h-7 px-2.5 text-xs bg-[#D12053] hover:bg-[#b01b45] text-white font-semibold gap-1 shadow-xs"
+                      >
+                        <CreditCard className="h-3 w-3" />
+                        <span>Pay {formatBDT(200)} via bKash</span>
+                      </Button>
                     )
                   ) : (
-                    <span className="text-xs font-mono text-muted-foreground">
-                      Standard SLA
-                    </span>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setSelectedReportForPayment(report)}
+                      className="h-7 px-2 text-xs border-amber-500/30 text-amber-600 hover:bg-amber-500/10 font-medium gap-1"
+                    >
+                      <Flame className="h-3 w-3 text-amber-500" />
+                      <span>Upgrade Priority</span>
+                    </Button>
                   )}
                 </div>
               </div>
@@ -202,6 +218,13 @@ export default function MyReportsList({
           })}
         </div>
       )}
+
+      {/* bKash Payment Gateway Modal */}
+      <BkashPaymentModal
+        report={selectedReportForPayment}
+        isOpen={Boolean(selectedReportForPayment)}
+        onClose={() => setSelectedReportForPayment(null)}
+      />
     </div>
   );
 }

@@ -1,0 +1,27 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.*
+
+# Next.js App Router build & output
+/.next/
+/out/
+/build/
+
+# Environment files
+.env*
+!.env.example
+
+# Testing & Coverage
+/coverage
+
+# References & postman docs (must never be committed)
+reference/
+docs/*postman*
+docs/*Postman*
+
+# OS & Misc
+.DS_Store
+*.pem
+*.tsbuildinfo
+next-env.d.ts

@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/popover";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
+  useMarkAllNotificationsAsRead,
   useMarkNotificationAsRead,
   useNotifications,
 } from "@/hooks/notification.hook";
@@ -25,6 +26,7 @@ export default function NotificationCenter() {
   const notifications = extractDataArray<NotificationItem>(notifResponse?.data);
 
   const markAsReadMutation = useMarkNotificationAsRead();
+  const markAllAsReadMutation = useMarkAllNotificationsAsRead();
 
   const unreadNotifications = notifications.filter((n) => !n.isRead);
   const unreadCount = unreadNotifications.length;
@@ -36,10 +38,7 @@ export default function NotificationCenter() {
   };
 
   const handleMarkAllAsRead = async () => {
-    const unreadIds = unreadNotifications.map((n) => n.id);
-    for (const id of unreadIds) {
-      await markAsReadMutation.mutateAsync(id);
-    }
+    await markAllAsReadMutation.mutateAsync();
   };
 
   return (
@@ -95,7 +94,9 @@ export default function NotificationCenter() {
               variant="ghost"
               size="sm"
               onClick={handleMarkAllAsRead}
-              disabled={markAsReadMutation.isPending}
+              disabled={
+                markAllAsReadMutation.isPending || markAsReadMutation.isPending
+              }
               className="h-7 px-2 text-xs text-muted-foreground hover:text-foreground gap-1"
             >
               <CheckCheck className="h-3.5 w-3.5" />

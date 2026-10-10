@@ -16,3 +16,11 @@ export function markNotificationAsRead(
     method: "PATCH",
   });
 }
+
+export function markAllNotificationsAsRead(): Promise<
+  ApiResponse<{ count: number }>
+> {
+  return apiClient<ApiResponse<{ count: number }>>("/notifications/read-all", {
+    method: "PATCH",
+  });
+}

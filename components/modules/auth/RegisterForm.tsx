@@ -55,9 +55,12 @@ export function RegisterForm() {
   });
 
   return (
-    <div className="w-full space-y-6">
-      <div className="space-y-2 text-center">
-        <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500/10 text-amber-500 ring-1 ring-amber-500/20">
+    <div suppressHydrationWarning className="w-full space-y-6">
+      <div suppressHydrationWarning className="space-y-2 text-center">
+        <div
+          suppressHydrationWarning
+          className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500/10 text-amber-500 ring-1 ring-amber-500/20"
+        >
           <UserPlus className="h-6 w-6" />
         </div>
         <h1 className="text-2xl font-bold tracking-tight text-foreground">

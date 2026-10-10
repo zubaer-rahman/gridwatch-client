@@ -13,7 +13,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-background">
+    <div suppressHydrationWarning className="flex min-h-screen bg-background">
       <CommandPalette />
       {/* Mobile Sidebar Backdrop */}
       {isSidebarOpen && (

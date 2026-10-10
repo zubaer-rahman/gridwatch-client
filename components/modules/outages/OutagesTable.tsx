@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertCircle, ChevronRight, RefreshCw } from "lucide-react";
+import { AlertCircle, ChevronRight, RefreshCw, Zap } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import PriorityLabel from "@/components/modules/outages/PriorityLabel";
 import StatusDot from "@/components/modules/outages/StatusDot";
@@ -173,18 +173,39 @@ export function OutagesTable({
                     : "Not scheduled"}
                 </TableCell>
                 <TableCell className="text-right">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-8 w-8 text-muted-foreground hover:text-foreground"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleOpenDetail(outage);
-                    }}
-                    aria-label={`View details for incident ${outage.id}`}
-                  >
-                    <ChevronRight className="h-4 w-4" />
-                  </Button>
+                  <div className="flex items-center justify-end gap-1">
+                    {(outage.status === "REPORTED" ||
+                      outage.status === "ACKNOWLEDGED") && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="h-7 text-[11px] gap-1 px-2 border-amber-500/30 text-amber-500 hover:bg-amber-500/10 cursor-pointer"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const params = new URLSearchParams(
+                            searchParams.toString(),
+                          );
+                          params.set("assign", outage.id);
+                          router.push(`?${params.toString()}`);
+                        }}
+                      >
+                        <Zap className="h-3 w-3" />
+                        <span>Assign</span>
+                      </Button>
+                    )}
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8 text-muted-foreground hover:text-foreground cursor-pointer"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleOpenDetail(outage);
+                      }}
+                      aria-label={`View details for incident ${outage.id}`}
+                    >
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </TableCell>
               </TableRow>
             );

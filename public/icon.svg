@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none">
+  <defs>
+    <linearGradient id="gridBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="boltGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+  </defs>
+  <!-- Background Container -->
+  <rect x="1" y="1" width="30" height="30" rx="7" fill="url(#gridBg)" stroke="#f59e0b" stroke-width="1.5" />
+  
+  <!-- Subtle Grid Telemetry Accents -->
+  <line x1="4" y1="16" x2="28" y2="16" stroke="#f59e0b" stroke-width="0.5" stroke-opacity="0.25" stroke-dasharray="1 2" />
+  <line x1="16" y1="4" x2="16" y2="28" stroke="#f59e0b" stroke-width="0.5" stroke-opacity="0.25" stroke-dasharray="1 2" />
+  <circle cx="6" cy="6" r="0.75" fill="#f59e0b" fill-opacity="0.5" />
+  <circle cx="26" cy="6" r="0.75" fill="#f59e0b" fill-opacity="0.5" />
+  <circle cx="6" cy="26" r="0.75" fill="#f59e0b" fill-opacity="0.5" />
+  <circle cx="26" cy="26" r="0.75" fill="#f59e0b" fill-opacity="0.5" />
+
+  <!-- Power Bolt Icon -->
+  <polygon points="18,4 9,17 16,17 14,28 23,14 16,14" fill="url(#boltGrad)" stroke="#fef08a" stroke-width="0.5" stroke-linejoin="round" />
+</svg>

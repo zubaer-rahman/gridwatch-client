@@ -19,6 +19,15 @@ export const metadata: Metadata = {
   title: "GridWatch | Outage Management System",
   description:
     "Intelligent power distribution outage management and electrical grid telemetry for Bangladesh.",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

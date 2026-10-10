@@ -4,6 +4,7 @@ import { Kanban, List, Plus, RefreshCw, Search } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useMemo, useState } from "react";
 import AssignModal from "@/components/modules/dispatch/AssignModal";
+import LogOutageModal from "@/components/modules/outages/LogOutageModal";
 import OutageDetailDrawer from "@/components/modules/outages/OutageDetailDrawer";
 import OutagesKanban from "@/components/modules/outages/OutagesKanban";
 import OutagesSkeleton from "@/components/modules/outages/OutagesSkeleton";
@@ -248,6 +249,9 @@ function OutagesViewContent() {
 
       {/* Operator Dispatch Assignment Modal */}
       <AssignModal />
+
+      {/* Log Outage Modal */}
+      <LogOutageModal />
     </div>
   );
 }

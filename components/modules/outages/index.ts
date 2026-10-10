@@ -1,3 +1,4 @@
+export * from "./LogOutageModal";
 export * from "./OutageDetailDrawer";
 export * from "./OutagesKanban";
 export * from "./OutagesSkeleton";

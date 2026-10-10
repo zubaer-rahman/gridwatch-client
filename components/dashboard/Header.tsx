@@ -1,7 +1,7 @@
 "use client";
 
-import { LogOut, Menu, Search, User } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { Camera, LogOut, Menu, Search, User } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 import NotificationCenter from "@/components/dashboard/NotificationCenter";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { Avatar } from "@/components/ui/avatar";
@@ -22,9 +22,12 @@ export interface HeaderProps {
 }
 
 export function Header({ onToggleSidebar }: HeaderProps) {
+  const router = useRouter();
   const pathname = usePathname();
-  const { user } = useCurrentUser();
+  const { user, avatar, role } = useCurrentUser();
   const { mutate: logout, isPending: isLoggingOut } = useLogout();
+
+  const rolePath = role ? role.toLowerCase() : "customer";
 
   // Create friendly breadcrumb label from route
   const pathSegments = pathname.split("/").filter(Boolean);
@@ -83,11 +86,12 @@ export function Header({ onToggleSidebar }: HeaderProps) {
 
         {/* User Account Dropdown */}
         <DropdownMenu>
-          <DropdownMenuTrigger className="rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring">
+          <DropdownMenuTrigger className="rounded-full p-0.5 outline-none hover:ring-2 hover:ring-amber-500/40 transition-all focus-visible:ring-2 focus-visible:ring-ring cursor-pointer">
             <Avatar
+              src={avatar}
               fallback={user?.email ? user.email.charAt(0).toUpperCase() : "U"}
-              size="sm"
-              className="cursor-pointer border-amber-500/30 ring-1 ring-amber-500/20"
+              size="md"
+              className="h-9 w-9 sm:h-10 sm:w-10 cursor-pointer border-amber-500/40 ring-1 ring-amber-500/30 shadow-xs"
             />
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">
@@ -110,11 +114,20 @@ export function Header({ onToggleSidebar }: HeaderProps) {
               </p>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <div className="flex items-center gap-2 text-xs">
-                <User className="h-3.5 w-3.5 text-muted-foreground" />
-                <span>ID: {user?.userId?.slice(0, 8)}...</span>
+            <DropdownMenuItem className="cursor-default select-text">
+              <div className="flex items-center gap-2 text-xs text-muted-foreground font-mono">
+                <User className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+                <span className="truncate">
+                  ID: {user?.userId?.slice(0, 8)}...
+                </span>
               </div>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => router.push(`/${rolePath}/avatar`)}
+              className="cursor-pointer font-medium"
+            >
+              <Camera className="h-3.5 w-3.5 text-amber-500 mr-2 shrink-0" />
+              <span>Update Profile Avatar</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem

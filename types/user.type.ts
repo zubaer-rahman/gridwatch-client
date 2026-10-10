@@ -27,6 +27,7 @@ export interface DecodedToken {
   userId: string;
   email: string;
   role: Role;
+  avatar?: string | null;
   exp?: number;
   iat?: number;
 }

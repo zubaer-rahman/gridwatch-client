@@ -1,6 +1,6 @@
 import type { Area } from "./grid.type";
 
-export type ScheduleStatus = "UPCOMING" | "ACTIVE" | "COMPLETED" | "CANCELLED";
+export type ScheduleStatus = "UPCOMING" | "ONGOING" | "COMPLETED" | "CANCELLED";
 
 export interface Schedule {
   id: string;

@@ -45,7 +45,7 @@ export default function AreaStatusCard({
   );
   const allSchedules = extractDataArray<Schedule>(schedulesData?.data) || [];
   const activeOrUpcomingSchedules = allSchedules.filter(
-    (s) => s.status === "ACTIVE" || s.status === "UPCOMING",
+    (s) => s.status === "ONGOING" || s.status === "UPCOMING",
   );
 
   // Query outages for this area
@@ -383,7 +383,7 @@ export default function AreaStatusCard({
                         <Badge
                           variant="outline"
                           className={`text-[9px] font-mono px-1.5 py-0 ${
-                            sched.status === "ACTIVE"
+                            sched.status === "ONGOING"
                               ? "bg-rose-500/10 text-rose-500 border-rose-500/30"
                               : "bg-amber-500/10 text-amber-500 border-amber-500/30"
                           }`}

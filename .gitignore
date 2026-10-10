@@ -25,3 +25,4 @@ docs/*Postman*
 *.pem
 *.tsbuildinfo
 next-env.d.ts
+.vercel

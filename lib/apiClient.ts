@@ -36,11 +36,16 @@ export const apiClient = ofetch.create({
     }
   },
   onResponseError({ response }) {
+    const validationDetail = response?._data?.errors?.[0]?.message;
+    const baseMessage = response?._data?.message;
     const errorMessage =
-      response?._data?.message ||
-      response?._data?.errorMessages?.[0]?.message ||
-      response?.statusText ||
-      "An unexpected network error occurred";
+      baseMessage === "Validation Error" && validationDetail
+        ? validationDetail
+        : baseMessage ||
+          validationDetail ||
+          response?._data?.errorMessages?.[0]?.message ||
+          response?.statusText ||
+          "An unexpected network error occurred";
 
     throw new Error(errorMessage);
   },
